@@ -52,11 +52,11 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 		markup = "<div class='dndmedia_file_row'><div class=\"dndmedia_thumb_div\"><img src=\""+response.url+"\" alt=\"\" width=\"120\" class=dndmedia_thumb_img /><label>New File</label><a href=\"#\" class=\"dndmedia-insert-link\" rel=\""+response.url+"\" >insert</a></div></div>";
 		jQuery('#dndmedia_files').append( markup );
 		
-		var dndmedia_sendtoeditor = jQuery('#dndmedia_sendtoeditor').val();
+		var dndmedia_sendtoeditor = jQuery('#dndmedia_sendtoeditor').attr('checked');
 		var dndmedia_attachment = jQuery('#dndmedia_attachment').val();
 		var dndmedia_attachment_size = jQuery('#dndmedia_attachment_size').val();
 		
-		if (dndmedia_sendtoeditor == 1)
+		if (dndmedia_sendtoeditor)
 		{
 			var url = response.url;
 			//alert('dndmedia_attachment_size' + dndmedia_attachment_size);

@@ -4,7 +4,7 @@ Donate link: http://jigniter.com
 Tags: upload, media, files, drag & drop 
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 1.0
+Stable tag: trunk
 
 Magn WP Drag and Drop Upload
 
@@ -29,6 +29,13 @@ How it works with Magn WP Drag and Drop Upload?
 
 Easy, right?
 
+Here is a list of features:
+- Automagically insert the image in a desired format into the post editor.
+- Creates an attachment for the post you are intersting the image on.
+- Support multiple files at once (just drag and drop multiple images to the WordPress admin panel and voila!)
+- 
+
+
 
 == Installation ==
 
@@ -37,6 +44,18 @@ Easy, right?
 3. Activate the widget and select option for use in the sidebar 
 
 Once the plugin is activated, you can go to New Post and a new meta box should appear under the editor.
+
+How to use it
+
+You can configure the default thumbnail image. This option is very useful if you want to avoid posting the full or large image in WordPress post. 
+It is recommended to setup your Medium size dimensions and then configure the plugin to "send to editor" a medium size image instead of the full image.
+
+
+
+
+
+
+
 
 == Frequently Asked Questions ==
 

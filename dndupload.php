@@ -2,24 +2,18 @@
 /* 
 Plugin Name: Magn Drag and Drop Upload
 Plugin URI: 
-Description: 
+Description: This plugin will help you to drag and drop images directly in your New Post page. Saves 90% of time while uploading images.
 Version: 0.1
 Author: 
 Author URI: http://netvivs.com/
 
 
 Resources:
-
 http://www.thebuzzmedia.com/html5-drag-and-drop-and-file-api-tutorial/
 http://imgscalr.com/
-
 http://return-true.com/2010/01/using-ajax-in-your-wordpress-theme-admin/
 http://www.webmaster-source.com/2010/01/08/using-the-wordpress-uploader-in-your-plugin-or-theme/
-
 http://wpsnipp.com/index.php/functions-php/add-custom-tab-to-featured-image-media-library-popup/
-
-
-
 */ 
 
 require_once(dirname(__FILE__) . '/dndupload-ui.php');
@@ -42,7 +36,7 @@ function widget_dndmedia_init() {
 	function dndmedia_create_menu() {
 
 		//create new top-level menu
-		add_menu_page('dndmedia Plugin Settings', 'dndmedia Settings', 'administrator', __FILE__, 'dndmedia_settings_page',plugins_url('/images/dndmediaicon.png', __FILE__));
+		add_menu_page('dndmedia Plugin Settings', 'DnD Upload Settings', 'administrator', __FILE__, 'dndmedia_settings_page',plugins_url('/images/dndmediaicon.png', __FILE__));
 
 		//call register settings function
 		add_action( 'admin_init', 'register_dndmedia_settings' );
@@ -57,9 +51,9 @@ function widget_dndmedia_init() {
 
 	function register_dndmedia_settings() {
 		//register our settings
-		register_setting( 'dndmedia-settings-group', 'wpsync_spreadsheet_key' );
-		register_setting( 'dndmedia-settings-group', 'wpsync_spreadsheet_sheet' );
-		register_setting( 'dndmedia-settings-group', 'dndmedia_use_metabox' );
+		register_setting( 'dndmedia-settings-group', 'dndmedia_sendtoeditor' );
+		register_setting( 'dndmedia-settings-group', 'dndmedia_attachment' );
+		register_setting( 'dndmedia-settings-group', 'dndmedia_attachment_size' );
 	}
 	
 	function dndmedia_settings_page()
@@ -88,7 +82,7 @@ function dndmedia_post_edit_form_tag()
 add_action('edit_form_advanced', 'dndmedia_edit_form_advanced');
 function dndmedia_edit_form_advanced( )
 {
-	echo 'Ajax image edit tag form ';
+	//echo 'Ajax image edit tag form ';
 	dndmedia_edit_form_advanced_ui();
 }
 
@@ -172,25 +166,44 @@ add_action('wp_ajax_dndmedia', 'ajax_dndmedia_callback');
 function ajax_dndmedia_callback() {
 	global $wpdb; // this is how you get access to the database
 
+	$log = array();
+	
 	$post_id = $_REQUEST['post_id'];
 	//var_dump($_REQUEST); <-- works
 
 	// STEP 1 : Handle the upload with jsUpload script
-	$upload_tmp_dir = get_cfg_var('upload_tmp_dir');
+	$log[] = "Step 1: Uploading file";
+	
+	//$upload_tmp_dir = get_cfg_var('upload_tmp_dir');
+	$upload_tmp_dir = dirname(__FILE__).'/temp';
 	$tempname = tempnam('', '');
+//var_dump($upload_tmp_dir);
+//var_dump($tempname);
+
 	// list of valid extensions, ex. array("jpeg", "xml", "bmp")
 	$allowedExtensions = array();
 	// max file size in bytes
 	$sizeLimit = 10 * 1024 * 1024;
 	$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+	$log[] = "Uploading file to $upload_tmp_dir";
 	$result = $uploader->handleUpload( $upload_tmp_dir.'/' ); // with ending slash
+	if (!empty($result['filename']))
+	{
+		$log[] = "File uploaded to temp directory";
+	}else{
+		$log[] = "Error uploading file. /temp directory is writtable?";
+	}
 	//echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+//var_dump($result);
 
+	
 	
 	// STEP 2 : Handle the upload with WordPress logic
 
 	// Copy to temp
-	$tempname = $upload_tmp_dir.'/'.$_REQUEST['qqfile'];
+	$log[] = "Step 2: processing file in WordPress";
+	//$tempname = $upload_tmp_dir.'/'.$_REQUEST['qqfile'];
+	$tempname = $result['filename']; // use the output filename from Step 1
 	$basename = $_REQUEST['qqfile'];
 	
 	// Override values before using wp_handle_upload
@@ -200,7 +213,7 @@ function ajax_dndmedia_callback() {
 	$_file['name'] = $basename;
 	$_file['tmp_name'] = $tempname;
 	$_file['type'] = $type;
-	$_file['size'] = filesize($tempname);
+	$_file['size'] = @filesize($tempname);
 	//chmod($newtempname, '0777');
 
 	// Use modified wp_handle_upload to store the uploaded file under WordPress
@@ -208,7 +221,11 @@ function ajax_dndmedia_callback() {
 
 	// In case of error throuw it
 	if ( isset($fileinfo['error']) )
+	{
 		return new WP_Error( 'upload_error', $fileinfo['error'] );
+	}
+	
+	$log[] = "File uploaded to WordPress";
 
 	$url = $fileinfo['url'];
 	$type = $fileinfo['type'];
@@ -216,12 +233,18 @@ function ajax_dndmedia_callback() {
 	$content = '';	
 	
 	
+	// remove tmp file
+	@unlink($tempname);
+	
 	// STEP 3 :: Process the attachment (see: http://wordpress.stackexchange.com/questions/17870/media-handle-upload-weird-thing )
+	$log[] = "Step 3: Attaching image to post";
 	$attachment = array('post_mime_type' => $type,'post_title' => $basename );
 	$attach_id = wp_insert_attachment( $attachment, $file );
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 	$attach_data = wp_generate_attachment_metadata($attach_id, $file);
 	$attach_res = wp_update_attachment_metadata($attach_id, $attach_data);
+	
+	$log[] = "Ready to send results to client";
 	
 	$result = array(
 			'file' => $file,
@@ -230,7 +253,10 @@ function ajax_dndmedia_callback() {
 			'attachment_id' => $attach_id,
 			'attachment_data' => $attach_data,
 			'attachment_result' => $attach_res,
+			'log' => $log
 			);
+			
+	
 			
 	echo json_encode($result);
 	die(); // this is required to return a proper result
@@ -515,11 +541,10 @@ class qqFileUploader {
             }
         }
 		
-		
-        
         if ($this->file->save($uploadDirectory . $filename . '.' . $ext)){
+			$filename = $uploadDirectory . $filename . '.' . $ext;
 			//echo $uploadDirectory . $filename . '.' . $ext;
-            return array('success'=>true);
+            return array('success'=>true, 'filename'=>$filename);
         } else {
             return array('error'=> 'Could not save uploaded file.' .
                 'The upload was cancelled, or server error encountered');
