@@ -69,3 +69,5 @@ It is recommended to setup your Medium size dimensions and then configure the pl
 
 == Screenshots ==
 
+1. This screenshot shows the imaga after being uploaded using this plugin. The bottom meta box displays the uploaded images and some basic options to decide what to do once you drop the file in the green area.
+2. Here you can see the green area box that appears when you drag the file to the WordPress admin area.
