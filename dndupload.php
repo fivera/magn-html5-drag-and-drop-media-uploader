@@ -149,7 +149,7 @@ function dndmedia_save_postdata( $post_id ) {
   }
 
   // OK, we're authenticated: we need to find and save the data
-  $mydata = $_POST['myplugin_new_field'];
+//$mydata = $_POST['myplugin_new_field'];
 
   // Do something with $mydata 
   // probably using add_post_meta(), update_post_meta(), or 

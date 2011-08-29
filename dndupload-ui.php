@@ -1,6 +1,5 @@
 <?php
 
-
 function dndmedia_show_ui_settings_page()
 {
 
@@ -48,8 +47,6 @@ function dndmedia_show_ui_settings_page()
 		</div><!-- end wrap-->
 	<?
 } // end wpsync_show_ui_settings_page
-
-
 
 function dndmedia_edit_form_advanced_ui()
 {
