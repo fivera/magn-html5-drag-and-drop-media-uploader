@@ -1,5 +1,5 @@
 === Magn WP Drag and Drop Upload ===
-Contributors: Julian
+Contributors: jmagnone
 Donate link: http://jigniter.com
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
