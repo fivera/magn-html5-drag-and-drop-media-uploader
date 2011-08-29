@@ -1,0 +1,70 @@
+
+
+#drop-box-overlay {
+	margin: 1px;
+	padding: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	position: fixed;
+	background-color: #222222;
+	display: none;
+	
+	z-index: 50;
+	opacity: 0.9;
+}
+
+#drop-box-overlay h1 {
+	padding: 2em !important;
+	top: 38%;
+	left: 35%;
+	position: absolute;
+	
+	border: 2px solid #679B00 !important;
+	background-color: #C9F76F !important;
+	-moz-border-radius: 4px 4px;
+	-webkit-border-radius: 4px 4px;
+	border-bottom-left-radius: 4px 4px;
+	border-bottom-right-radius: 4px 4px;
+	border-top-left-radius: 4px 4px;
+	border-top-right-radius: 4px 4px;
+	
+	color: #222222 !important;
+	font-size: 150% !important;
+	text-shadow: 1px 1px 1px #FFFFFF !important;
+}
+
+#drop-box-jsupload
+{
+	background-color: white;
+	border: 2px solid #efefef;
+	padding: 20px 40px;
+	display:block;
+	text-align:center;
+}
+
+
+.dndmedia_thumb_div
+{
+	float:left;
+	margin-right: 10px;
+	padding: 5px;
+	background-color: white;
+	border: 1px solid #cccccc;
+	-moz-border-radius: 4px 4px;
+	-webkit-border-radius: 4px 4px;
+	border-radius: 4px 4px;
+	
+}
+
+.dndmedia_thumb_div:hover
+{
+	background-color:gray;
+}
+
+.dndmedia_thumb_div label
+{
+	display:block;
+	text-align:center;
+}
