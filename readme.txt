@@ -2,8 +2,8 @@
 Contributors: Julian
 Donate link: http://jigniter.com
 Tags: upload, media, files, drag & drop 
-Requires at least: 2.0
-Tested up to: 2.5
+Requires at least: 3.1.2
+Tested up to: 3.1.2
 Stable tag: trunk
 
 Magn WP Drag and Drop Upload
@@ -13,6 +13,8 @@ Magn WP Drag and Drop Upload
 Magn WP Drag and Drop Upload helps to save your time while uploading images to WordPress posts. By using Drag And Drop Upload plugin you can automagically
 upload your images to WordPress posts thanks to HTML5 and an drag and drop upload script. At the end, you'll see that saves lot of time while uploading your
 images to WP posts. This is an innovative way to upload your images to WordPress and save time.
+
+This plugin can only work on modern web browsers and takes advantage of HTML5 Drag and Drop support.
 
 How was the old process?
 1. Create a new post
