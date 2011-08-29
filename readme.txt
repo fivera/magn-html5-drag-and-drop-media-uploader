@@ -19,30 +19,30 @@ This plugin can only work on modern web browsers and takes advantage of HTML5 Dr
 How was the old process?
 
 1. Create a new post
-1. Click on the Upload Image icon
-1. Let's wait for the popup to appear
-1. Click on the Upload button
-1. Choose the image in your hard drive or remote url
-1. Click on Accept
-1. Click on Insert into Post option
+2. Click on the Upload Image icon
+3. Let's wait for the popup to appear
+4. Click on the Upload button
+5. Choose the image in your hard drive or remote url
+6. Click on Accept
+7. Click on Insert into Post option
 
 How it works with Magn WP Drag and Drop Upload?
 
 1. Create a new post
-1. Drag and drop your image
+2. Drag and drop your image
 
 Easy, right?
 
 Here is a list of features:
 
 1. Automagically insert the image in a desired format into the post editor.
-1. Creates an attachment for the post you are intersting the image on.
-1. Support multiple files at once (just drag and drop multiple images to the WordPress admin panel and voila!)
+2. Creates an attachment for the post you are intersting the image on.
+3. Support multiple files at once (just drag and drop multiple images to the WordPress admin panel and voila!)
 
 Wish list:
 
 1. Change file name on the fly.
-1. Improve ALT and filename management.
+2. Improve ALT and filename management.
 
 
 == Installation ==
