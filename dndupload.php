@@ -92,7 +92,15 @@ function dndmedia_edit_form_advanced( )
 add_action('admin_init', 'dndmedia_admin_head');
 function dndmedia_admin_head()
 {
-	/// new
+	wp_enqueue_script("jquery-ui-core");
+	wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+
+	$js_file = plugins_url('/js/ui.progressbar.js', __FILE__);
+	//if ( file_exists($js_file) )
+	{
+		wp_register_script('ui_progressbar_js', $js_file, array('jquery-ui-widget'), '1.0', FALSE);
+		wp_enqueue_script('ui_progressbar_js');
+	}
 	
 	$js_file = plugins_url('/js/jsupload/fileuploader.js', __FILE__);
 	//if ( file_exists($js_file) )
@@ -100,9 +108,6 @@ function dndmedia_admin_head()
 		wp_register_script('fileuploader_js', $js_file, array('jquery'), '1.0', FALSE);
 		wp_enqueue_script('fileuploader_js');
 	}
-
-
-
 
 	$css_file = plugins_url('/dndupload.css', __FILE__);
 	//if ( file_exists($css_file) )

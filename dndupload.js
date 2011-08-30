@@ -19,22 +19,38 @@ function magnCreateUploader() {
 
 	var postid = jQuery('input#post_ID').val();
 	
+	// set progress bar
+	//jQuery("#upload-status-progressbar").progressbar({value: 0});
+	
 	var uploader = new qq.FileUploader({
 		element: document.getElementById('drop-box-jsupload'),
 		action: ajaxurl,
 		debug: true,
 		
 		params: {'action': 'dndmedia', 'post_id': postid },
-		onSubmit: function(id, fileName){},
+		onSubmit: function(id, fileName){
+		
+			//jQuery("#upload-status-progressbar").progressbar({value:20});
+		},
 		onProgress: function(id, fileName, loaded, total){
 			jQuery('#dndmedia_status').text("Uploading new file. Progress "+loaded+ " of " + total );
+
+			// Update the progress bar
+			//var currentProgress = total/loaded * 100;
+			//jQuery("#upload-status-progressbar").progressbar({value: currentProgress});
 		},
 		onComplete: function(id, fileName, response){
 			
 			dndmediaProcessCompletedFileUpload(id, fileName, response);
+			
+			//jQuery("#upload-status-progressbar").progressbar({value:0});
+			jQuery("#upload-status-progressbar").fadeOut(0);
 		},
 		onCancel: function(id, fileName){
 			jQuery('#dndmedia_status').text("Last upload was cancelled");
+
+			//jQuery("#upload-status-progressbar").progressbar({value:0});
+			jQuery("#upload-status-progressbar").fadeOut(0);
 		},
 		
 	});           
@@ -49,7 +65,7 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 	if (response.url)
 	{
 		var markup = new String();
-		markup = "<div class='dndmedia_file_row'><div class=\"dndmedia_thumb_div\"><img src=\""+response.url+"\" alt=\"\" width=\"120\" class=dndmedia_thumb_img /><label>New File</label><a href=\"#\" class=\"dndmedia-insert-link\" rel=\""+response.url+"\" >insert</a></div></div>";
+		markup = "<div class='dndmedia_file_row'><div class=\"dndmedia_thumb_div\"><img src=\""+response.url+"\" alt=\"\" width=\"120\" class=dndmedia_thumb_img /><label>New File</label><a href=\"#\" class=\"dndmedia-insert-link\" rel=\""+response.url+"\" style=\"display:none;\" >insert</a></div></div>";
 		jQuery('#dndmedia_files').append( markup );
 		
 		var dndmedia_sendtoeditor = jQuery('#dndmedia_sendtoeditor').attr('checked');

@@ -79,12 +79,15 @@ function dndmedia_edit_form_advanced_ui()
 
 function dndmedia_show_metabox_ui()
 {
+
+	$this_plugin_url = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
 ?>
 	<div id="dndmedia_meta_box">
 		<h2>Start dropping your images</h2>
 		
-		<div id="dndmedia_status">
-			Initial status: waiting...
+		<div>
+			<span id="dndmedia_status"></span>		
+			<div id="upload-status-progressbar" style="display:none;"><img src="<?php echo $this_plugin_url.'/images/loader.gif' ?>"></div> 
 		</div>
 		
 		<div id="dndmedia_files">

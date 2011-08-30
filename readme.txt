@@ -1,6 +1,6 @@
 === Magn WP Drag and Drop Upload ===
 Contributors: jmagnone
-Donate link: http://jigniter.com
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HH6C3PGQEE2GW
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
 Tested up to: 3.1.2
@@ -49,7 +49,7 @@ Wish list:
 
 == Installation ==
 
-1. Upload `dndupload` directory to the `/wp-content/plugins/` directory
+1. Upload the plugin folder (`dndupload`?) to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Add write permissions to /wp-content/plugins/dndupload/temp 
 
@@ -59,12 +59,6 @@ How to use it
 
 You can configure the default thumbnail image. This option is very useful if you want to avoid posting the full or large image in WordPress post. 
 It is recommended to setup your Medium size dimensions and then configure the plugin to "send to editor" a medium size image instead of the full image.
-
-
-
-
-
-
 
 
 == Frequently Asked Questions ==
