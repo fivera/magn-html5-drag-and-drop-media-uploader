@@ -3,7 +3,7 @@
 Plugin Name: Magn Drag and Drop Upload
 Plugin URI: 
 Description: This plugin will help you to drag and drop images directly in your New Post page. Saves 90% of time while uploading images.
-Version: 0.1
+Version: 0.2
 Author: 
 Author URI: http://netvivs.com/
 
@@ -238,8 +238,8 @@ function ajax_dndmedia_callback() {
 	
 	// STEP 3 :: Process the attachment (see: http://wordpress.stackexchange.com/questions/17870/media-handle-upload-weird-thing )
 	$log[] = "Step 3: Attaching image to post";
-	$attachment = array('post_mime_type' => $type,'post_title' => $basename );
-	$attach_id = wp_insert_attachment( $attachment, $file );
+	$attachment = array('post_mime_type' => $type,'post_title' => $basename, 'post_status' => 'inherit' );
+	$attach_id = wp_insert_attachment( $attachment, $file, $post_id );
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 	$attach_data = wp_generate_attachment_metadata($attach_id, $file);
 	$attach_res = wp_update_attachment_metadata($attach_id, $attach_data);

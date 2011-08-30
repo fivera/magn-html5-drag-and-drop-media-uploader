@@ -29,7 +29,7 @@ How was the old process?
 How it works with Magn WP Drag and Drop Upload?
 
 1. Create a new post
-2. Drag and drop your image
+2. Drag and drop your image (not inside the editor, please)
 
 Easy, right?
 
@@ -43,13 +43,15 @@ Wish list:
 
 1. Change file name on the fly.
 2. Improve ALT and filename management.
+3. Integratation with CDN plugins (currently not supported).
+4. Finish the progress bar display.
 
 
 == Installation ==
 
 1. Upload `dndupload` directory to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Activate the widget and select option for use in the sidebar 
+3. Add write permissions to /wp-content/plugins/dndupload/temp 
 
 Once the plugin is activated, you can go to New Post and a new meta box should appear under the editor.
 
