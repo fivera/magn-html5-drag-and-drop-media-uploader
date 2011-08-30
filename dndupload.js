@@ -30,6 +30,8 @@ function magnCreateUploader() {
 		params: {'action': 'dndmedia', 'post_id': postid },
 		onSubmit: function(id, fileName){
 		
+			// display progress bar
+			jQuery("#upload-status-progressbar").fadeIn(0);
 			//jQuery("#upload-status-progressbar").progressbar({value:20});
 		},
 		onProgress: function(id, fileName, loaded, total){
@@ -174,7 +176,7 @@ function dndmediaOnDrop(evt) {
 	//jQuery("#upload-status-progressbar").progressbar({value:0});
 	
 	// Show progressbar
-	jQuery("#upload-status-progressbar").fadeIn(0);
+	//jQuery("#upload-status-progressbar").fadeIn(0);
 	
 	// Get the dropped files.
 	var files = evt.dataTransfer.files;

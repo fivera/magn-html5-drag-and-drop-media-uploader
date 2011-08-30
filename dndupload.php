@@ -4,11 +4,10 @@ Plugin Name: Magn Drag and Drop Upload
 Plugin URI: 
 Description: This plugin will help you to drag and drop images directly in your New Post page. Saves 90% of time while uploading images.
 Version: 0.2
-Author: 
+Author: Julian Magnone
 Author URI: http://netvivs.com/
 
-
-Resources:
+Other Resources:
 http://www.thebuzzmedia.com/html5-drag-and-drop-and-file-api-tutorial/
 http://imgscalr.com/
 http://return-true.com/2010/01/using-ajax-in-your-wordpress-theme-admin/
@@ -48,7 +47,6 @@ function widget_dndmedia_init() {
 		add_meta_box( 'dndmedia_metabox', 'Magn Drag and Drop Upload', 'dndmedia_show_metabox_ui', 'post', 'normal', 'high' );
 	}
 
-
 	function register_dndmedia_settings() {
 		//register our settings
 		register_setting( 'dndmedia-settings-group', 'dndmedia_sendtoeditor' );
@@ -87,11 +85,16 @@ function dndmedia_edit_form_advanced( )
 }
 
 
-//add_action('admin_head-post-php', 'dndmedia_admin_head');
-//add_action('admin_head-post', 'dndmedia_admin_head');
+//add_action('admin_head-post-new.php', 'dndmedia_admin_head');
+//add_action('admin_head-post.php', 'dndmedia_admin_head');
 add_action('admin_init', 'dndmedia_admin_head');
 function dndmedia_admin_head()
 {
+	//if( defined('DOING_AJAX') ) return FALSE;
+	global $pagenow, $typenow;
+	if ($pagenow!='post-new.php' AND $pagenow!='post.php') return FALSE;
+
+	
 	wp_enqueue_script("jquery-ui-core");
 	wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
 
@@ -199,8 +202,6 @@ function ajax_dndmedia_callback() {
 		$log[] = "Error uploading file. /temp directory is writtable?";
 	}
 	//echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
-//var_dump($result);
-
 	
 	
 	// STEP 2 : Handle the upload with WordPress logic
@@ -261,13 +262,8 @@ function ajax_dndmedia_callback() {
 			'log' => $log
 			);
 			
-	
-			
 	echo json_encode($result);
 	die(); // this is required to return a proper result
-	
-	
-	return TRUE;
 }
 
 
@@ -395,12 +391,6 @@ return $upload_error_handler( $file, sprintf( __('The uploaded file could not be
 
 	return apply_filters( 'wp_handle_upload', array( 'file' => $new_file, 'url' => $url, 'type' => $type ), 'upload' );
 }
-
-
-
-
-/* qqqq */
-
 
 /**
  * Handle file uploads via XMLHttpRequest

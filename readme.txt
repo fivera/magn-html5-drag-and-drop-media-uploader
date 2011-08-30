@@ -47,6 +47,10 @@ Wish list:
 3. Integratation with CDN plugins (currently not supported).
 4. Finish the progress bar display.
 
+Known bugs:
+
+1. It is not inserting images when source code editor is active.
+
 
 == Installation ==
 
