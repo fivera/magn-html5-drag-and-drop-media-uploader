@@ -44,6 +44,11 @@
 	text-align:center;
 }
 
+#drop-box-jsupload:hover
+{
+	background-color: #fafafa;
+	border: 4px dotted #333333;
+}
 
 .dndmedia_thumb_div
 {

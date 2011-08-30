@@ -42,7 +42,7 @@ Here is a list of features:
 Wish list:
 
 1. Change file name on the fly.
-2. Improve ALT and filename management.
+2. Add SEO features, improve image attributes and support filename management.
 3. Integratation with CDN plugins (currently not supported).
 4. Finish the progress bar display.
 

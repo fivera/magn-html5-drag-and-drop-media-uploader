@@ -86,16 +86,15 @@ function dndmedia_show_metabox_ui()
 		<h2>Start dropping your images</h2>
 		
 		<div>
-			<span id="dndmedia_status"></span>		
-			<div id="upload-status-progressbar" style="display:none;"><img src="<?php echo $this_plugin_url.'/images/loader.gif' ?>"></div> 
+			<div id="upload-status-progressbar" style="display:none; float:left; width: 160px; height: 40px;"><img src="<?php echo $this_plugin_url.'/images/loader.gif' ?>" /></div> 
+			<div id="dndmedia_status" style="line-height: 30px;">Waiting for new file.</div>
+			<div style="clear:both;"></div>
 		</div>
 		
 		<div id="dndmedia_files">
 		</div>
 		
-		
 		<div style="clear:both;"></div>
-	
 	
 		<div>
 			<h4>DnD Media Options</h4>
