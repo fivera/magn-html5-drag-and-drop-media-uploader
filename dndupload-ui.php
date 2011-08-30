@@ -18,7 +18,7 @@ function dndmedia_show_ui_settings_page()
 				<input type="hidden" name="dndmedia_form_action" value="save">
 				
 				<div><input type="checkbox" id="dndmedia_sendtoeditor" name="dndmedia_sendtoeditor" value="1" <?php echo (get_option('dndmedia_sendtoeditor') ? "checked" : "") ?>> Auto publish into editor after successful upload</div>
-				<div><input type="checkbox" id="dndmedia_attachment" name="dndmedia_attachment" value="1" <?php echo (get_option('dndmedia_attachment') ? "checked" : "") ?> disabled="disabled"> Auto create attachment(recommended)</div>
+				<div><input type="checkbox" id="dndmedia_attachment" name="dndmedia_attachment" value="1" <?php echo (get_option('dndmedia_attachment') ? "checked" : "") ?> disabled="disabled"> Auto create attachment (recommended)</div>
 				<div>Default attachment size: 
 					<select name="dndmedia_attachment_size" id="dndmedia_attachment_size">
 						<option value=""></option>
@@ -53,7 +53,7 @@ function dndmedia_edit_form_advanced_ui()
 ?>
 
 	<div id="drop-box-overlay"> 
-		<h1>Drop files anywhere here to upload:
+		<h1>
 			<div id="drop-box-jsupload" >
 			 Drop files here...
 			</div>
@@ -99,7 +99,7 @@ function dndmedia_show_metabox_ui()
 		<div>
 			<h4>DnD Media Options</h4>
 			<div><input type="checkbox" id="dndmedia_sendtoeditor" name="dndmedia_sendtoeditor" value="1" checked="checked"> Auto publish into editor after successful upload</div>
-			<div><input type="checkbox" id="dndmedia_attachment" name="dndmedia_attachment" value="1" checked="checked" disabled="disabled"> Auto create attachment(recommended)</div>
+			<div><input type="checkbox" id="dndmedia_attachment" name="dndmedia_attachment" value="1" checked="checked" disabled="disabled"> Auto create attachment (recommended)</div>
 			<div>Default attachment size: 
 				<select name="dndmedia_attachment_size" id="dndmedia_attachment_size">
 					<option value=""></option>

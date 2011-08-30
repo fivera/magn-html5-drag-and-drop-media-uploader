@@ -33,7 +33,7 @@ function magnCreateUploader() {
 			//jQuery("#upload-status-progressbar").progressbar({value:20});
 		},
 		onProgress: function(id, fileName, loaded, total){
-			jQuery('#dndmedia_status').text("Uploading new file. Progress "+(loaded/1024)+ "kb. of " + (total/1024) + "kb." );
+			jQuery('#dndmedia_status').text("Uploading new file. Progress "+loaded+ " bytes of " + total + " bytes." );
 
 			// Update the progress bar
 			//var currentProgress = total/loaded * 100;
