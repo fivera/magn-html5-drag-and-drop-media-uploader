@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
 Tested up to: 3.1.2
-Stable tag: trunk
+Stable tag: 0.9
 
 Magn WP Drag and Drop Upload
 
@@ -72,3 +72,18 @@ It is recommended to setup your Medium size dimensions and then configure the pl
 
 1. This screenshot shows the imaga after being uploaded using this plugin. The bottom meta box displays the uploaded images and some basic options to decide what to do once you drop the file in the green area.
 2. Here you can see the green area box that appears when you drag the file to the WordPress admin area.
+
+== Changelog ==
+
+This is the update history:
+
+Changes 0.9
+
+1. New Import Image URL functionality was added. This is a great tool for all who want to import images directly from URL.
+2. URL drag and drop is now supported.
+3. Small fixes and bug troubleshooting.
+ 
+
+== Donations ==
+
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HH6C3PGQEE2GW
