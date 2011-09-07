@@ -3,6 +3,7 @@
 #drop-box-overlay {
 	margin: 1px;
 	padding: 0;
+	padding-top: 50px;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -16,7 +17,7 @@
 }
 
 #drop-box-overlay h1 {
-	padding: 2em !important;
+	padding: 3em !important;
 	top: 38%;
 	left: 35%;
 	position: absolute;

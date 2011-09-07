@@ -87,7 +87,7 @@ function dndmedia_show_metabox_ui()
 		
 		<div>
 			<div id="upload-status-progressbar" style="display:none; float:left; width: 160px; height: 40px;"><img src="<?php echo $this_plugin_url.'/images/loader.gif' ?>" /></div> 
-			<div id="dndmedia_status" style="line-height: 30px;">Waiting for new file.</div>
+			<div id="dndmedia_status" style="line-height: 30px;">Waiting for new upload. You can start dragging and dropping images or an image url</div>
 			<div style="clear:both;"></div>
 		</div>
 		
@@ -124,6 +124,11 @@ function dndmedia_show_metabox_ui()
 			</div>
 			
 		</div>
+		
+		<div>
+			<span>Special Gift: </span> <a href="javascript:void(0)" id="dndmedia_importurl">Import Image URL</a>
+		</div>
+		
 	</div>
 <?php
 }

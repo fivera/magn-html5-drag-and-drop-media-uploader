@@ -3,7 +3,7 @@
 Plugin Name: Magn Drag and Drop Upload
 Plugin URI: 
 Description: This plugin will help you to drag and drop images directly in your New Post page. Saves 90% of time while uploading images.
-Version: 0.2
+Version: 0.9
 Author: Julian Magnone
 Author URI: http://netvivs.com/
 
@@ -254,6 +254,7 @@ function ajax_dndmedia_callback() {
 	
 	$result = array(
 			'file' => $file,
+			'name' => $basename,
 			'url' => $url,
 			'type' => $type,
 			'attachment_id' => $attach_id,
@@ -266,6 +267,102 @@ function ajax_dndmedia_callback() {
 	die(); // this is required to return a proper result
 }
 
+
+add_action('wp_ajax_dndmedia_importurl', 'ajax_dndmedia_importurl_callback');
+function ajax_dndmedia_importurl_callback() {
+
+	$url = $_REQUEST['url'];
+	$result = array();
+	
+	if (!empty($url))
+	{
+		// get URL from external resource
+		$context = @stream_context_create(array('http' => array('header'=>'Connection: close'))); 
+		$content = @file_get_contents($url);
+		
+		
+		if (!empty($content))
+		{
+			// content is not empty then process it
+			$result = array('file'=> $file, 'url' => $url );
+			
+			$upload_tmp_dir = dirname(__FILE__).'/temp';
+			$tempname = $upload_tmp_dir.'/'.date('Ymdhi').'.tmp';
+			file_put_contents( $tempname , $content);
+			
+			//$basename = "newname.png";
+			
+			// Curious about what this does? See my comment here: http://stackoverflow.com/questions/2273280/how-to-get-the-last-path-in-the-url/7340428#7340428
+			$url_path = parse_url($url, PHP_URL_PATH);
+			$parts = explode('/', $url_path);
+			$basename = end($parts);
+			
+			// Override values before using wp_handle_upload
+			$overrides['test_form'] = FALSE;
+			$overrides['test_upload'] = FALSE;
+			$overrides['test_type'] = TRUE; // FALSE
+			$_file['name'] = $basename;
+			$_file['tmp_name'] = $tempname;
+			$_file['type'] = $type;
+			$_file['size'] = @filesize($tempname);
+			//chmod($newtempname, '0777');
+
+			// Use modified wp_handle_upload to store the uploaded file under WordPress
+			$fileinfo = dndmedia_wp_handle_upload($_file, $overrides);
+
+			if ( !isset($fileinfo['error']) )
+			{
+				$log[] = "File imported from URL and uploaded to WordPress";
+
+				$url = $fileinfo['url'];
+				$type = $fileinfo['type'];
+				$file = $fileinfo['file'];
+				
+				// remove tmp file
+				@unlink($tempname);
+				
+				// STEP 3 :: Process the attachment (see: http://wordpress.stackexchange.com/questions/17870/media-handle-upload-weird-thing )
+				$log[] = "Step 3: Attaching imported image into post";
+				$attachment = array('post_mime_type' => $type,'post_title' => $basename, 'post_status' => 'inherit' );
+				$attach_id = wp_insert_attachment( $attachment, $file, $post_id );
+				require_once ABSPATH . 'wp-admin/includes/image.php';
+				$attach_data = wp_generate_attachment_metadata($attach_id, $file);
+				$attach_res = wp_update_attachment_metadata($attach_id, $attach_data);
+				
+				$log[] = "Ready to send results to client";
+				
+				$result = array(
+						'file' => $file,
+						'name' => $basename,
+						'url' => $url,
+						'type' => $type,
+						'attachment_id' => $attach_id,
+						'attachment_data' => $attach_data,
+						'attachment_result' => $attach_res,
+						'log' => $log,
+						'op' => 'importurl',
+						);
+						
+			
+			} else {
+				//return new WP_Error( 'upload_error', $fileinfo['error'] );
+				$result['error'][] = "Upload error " . $fileinfo['error'] ;
+				
+			}
+			
+		} else {
+			
+			$result['error'][] = "Empty content error. Cannot import external image";
+		}
+		
+		
+	} else {
+		$result['error'][] = "Empty URL";
+	}
+	
+	echo json_encode($result);
+	die();
+}
 
 
 // Copied from WP and modified

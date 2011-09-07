@@ -13,6 +13,7 @@ jQuery(document).ready(function() {
 		//alert('inserting ok');
 	} );
 	
+	initDnDExtraTools();	
 });
 
 function magnCreateUploader() {
@@ -67,7 +68,7 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 	if (response.url)
 	{
 		var markup = new String();
-		markup = "<div class='dndmedia_file_row'><div class=\"dndmedia_thumb_div\"><img src=\""+response.url+"\" alt=\"\" width=\"120\" class=dndmedia_thumb_img /><label>New File</label><a href=\"#\" class=\"dndmedia-insert-link\" rel=\""+response.url+"\" style=\"display:none;\" >insert</a></div></div>";
+		markup = "<div class='dndmedia_file_row'><div class=\"dndmedia_thumb_div\"><img src=\""+response.url+"\" alt=\"\" width=\"120\" class=dndmedia_thumb_img /><label>"+response.name+"</label><a href=\"#\" class=\"dndmedia-insert-link\" rel=\""+response.url+"\" style=\"display:none;\" >insert</a></div></div>";
 		jQuery('#dndmedia_files').append( markup );
 		
 		var dndmedia_sendtoeditor = jQuery('#dndmedia_sendtoeditor').attr('checked');
@@ -121,7 +122,6 @@ function initDnD() {
 	
 	document.getElementById("drop-box-overlay").addEventListener("dragleave", dndmediaOnDragLeave, false);
 	document.getElementById("drop-box-overlay").addEventListener("dragover", dndmediaNoopHandler, false);
-	
 	// Add drop handling
 	document.getElementById("drop-box-overlay").addEventListener("drop", dndmediaOnDrop, false);
 	
@@ -183,25 +183,39 @@ function dndmediaOnDrop(evt) {
 	
 	// If anything is wrong with the dropped files, exit.
 	if(typeof files == "undefined" || files.length == 0)
+	{
+		var format = "Text";
+        var textData = evt.dataTransfer.getData (format);
+		if (typeof textData != "undefined" )
+		{	
+			var url = textData;
+			if ( url.indexOf("http") != -1 )
+			{
+				// try to import from url
+				dndImportFromUrl(url);
+			}
+		}
 		return;
-	
+	}
+		
 	// Update and show the upload box
 	var label = (files.length == 1 ? " file" : " files");
 	jQuery("#upload-count").html(files.length + label);
 	jQuery("#upload-thumbnail-list").fadeIn(125);
 	
 	// Process each of the dropped files individually
-	for(var i = 0, length = files.length; i < length; i++) {
+	/*for(var i = 0, length = files.length; i < length; i++) {
 		uploadFile(files[i], length);
-	}
+	}*/
 }
 
 // new jsupload file 
+/*
 function uploadFile(file, totalFiles)
 {
 	
 	
-}
+}*/
 
 /**
  * Used to update the progress bar and check if all uploads are complete. Checking
@@ -249,4 +263,49 @@ function generateUploadResult(label, image, altInputValue) {
 	markup += "</span></li>";
 	
 	return markup;
+}
+
+
+function initDnDExtraTools()
+{
+		jQuery("#dndmedia_importurl").click( function() {
+			var result = window.prompt("What is the URL you want to import?","");
+			if (result!=undefined)
+			{
+				dndImportFromUrl(result);
+			}
+		} );
+}
+
+function dndImportFromUrl(url)
+{
+	var postid = jQuery('input#post_ID').val();
+	
+	jQuery.ajax({
+	  url: ajaxurl,
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {'action': 'dndmedia_importurl', 'post_id': postid, 'url': url },
+	  beforeSend: function() {
+			jQuery("#upload-status-progressbar").fadeIn(0);
+			jQuery('#dndmedia_status').text("Uploading new file, please hold on..." );
+	  },
+	  success: function(response) {
+
+			var id = "1";
+			var fileName = response.file;
+			if (response.url)
+			{
+				dndmediaProcessCompletedFileUpload(id, fileName, response);			
+				
+				jQuery('#dndmedia_status').text("");
+			}else{
+				jQuery('#dndmedia_status').text("");
+			}
+        },
+	  complete: function() {
+			jQuery("#upload-status-progressbar").fadeOut(0);
+	  }
+	});
+
 }
