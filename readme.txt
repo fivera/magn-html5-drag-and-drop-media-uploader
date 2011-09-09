@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
 Tested up to: 3.1.2
-Stable tag: 0.9
+Stable tag: 1.0
 
 Magn WP Drag and Drop Upload
 
@@ -50,6 +50,7 @@ Wish list:
 Known bugs:
 
 1. It is not inserting images when source code editor is active.
+2. Only works for posts.
 
 
 == Installation ==
@@ -83,7 +84,3 @@ Changes 0.9
 2. URL drag and drop is now supported.
 3. Small fixes and bug troubleshooting.
  
-
-== Donations ==
-
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HH6C3PGQEE2GW

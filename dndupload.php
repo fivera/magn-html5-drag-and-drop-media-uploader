@@ -48,6 +48,13 @@ function widget_dndmedia_init() {
 	}
 
 	function register_dndmedia_settings() {
+		
+		/*if ($_REQUEST['dndmedia_form_action']=='save')
+		{
+			//echo '<div class="updated fade" id="message"><p>'.__('Options', 'magn').' <strong>'.__('SAVED', 'magn').'</strong></p></div>';
+			echo '<div class="updated fade" id="message"><p>Settings<strong>Saved</strong></p></div>';
+		}*/
+		
 		//register our settings
 		register_setting( 'dndmedia-settings-group', 'dndmedia_sendtoeditor' );
 		register_setting( 'dndmedia-settings-group', 'dndmedia_attachment' );
@@ -104,6 +111,7 @@ function dndmedia_admin_head()
 		wp_register_script('ui_progressbar_js', $js_file, array('jquery-ui-widget'), '1.0', FALSE);
 		wp_enqueue_script('ui_progressbar_js');
 	}
+	
 	
 	$js_file = plugins_url('/js/jsupload/fileuploader.js', __FILE__);
 	//if ( file_exists($js_file) )

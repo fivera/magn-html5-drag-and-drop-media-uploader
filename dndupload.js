@@ -2,7 +2,12 @@
 
 jQuery(document).ready(function() {
 	
-	magnCreateUploader();
+	var res = magnCreateUploader();
+	if (!res)
+	{
+		return false;
+	}
+	
 	initBrowserWarning();
 	initDnD();
 	
@@ -23,8 +28,13 @@ function magnCreateUploader() {
 	// set progress bar
 	//jQuery("#upload-status-progressbar").progressbar({value: 0});
 	
+	var element = jQuery('#drop-box-jsupload')[0];
+	
+	if (element == undefined) return false;
+	
 	var uploader = new qq.FileUploader({
-		element: document.getElementById('drop-box-jsupload'),
+		//element: document.getElementById('drop-box-jsupload'),
+		element: element,
 		action: ajaxurl,
 		debug: true,
 		
@@ -56,7 +66,9 @@ function magnCreateUploader() {
 			jQuery("#upload-status-progressbar").fadeOut(0);
 		},
 		
-	});           
+	});  
+
+	return true;	
 }
 
 function dndmediaProcessCompletedFileUpload(id, fileName, response)
