@@ -491,7 +491,7 @@ qq.FileUploader = function(o){
              '</div>',
 
         // template for one item in file list
-        fileTemplate: '<li>' +
+        fileTemplate: '<li style="display:none;">' +
                 '<span class="qq-upload-file"></span>' +
                 '<span class="qq-upload-spinner"></span>' +
                 '<span class="qq-upload-size"></span>' +

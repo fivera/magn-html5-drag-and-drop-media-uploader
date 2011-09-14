@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
 Tested up to: 3.1.2
-Stable tag: 1.0
+Stable tag: 1.1
 
 Magn WP Drag and Drop Upload
 
@@ -78,9 +78,16 @@ It is recommended to setup your Medium size dimensions and then configure the pl
 
 This is the update history:
 
-Changes 0.9
+Changes 1.1
+
+1. Adding new style for drag and drop.
+
+Changes 1.0
 
 1. New Import Image URL functionality was added. This is a great tool for all who want to import images directly from URL.
-2. URL drag and drop is now supported.
-3. Small fixes and bug troubleshooting.
+
+Changes 0.9
+
+1. URL drag and drop is now supported.
+2. Small fixes and bug troubleshooting.
  

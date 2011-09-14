@@ -83,16 +83,15 @@ function dndmedia_edit_form_advanced_ui()
 
 function dndmedia_show_metabox_ui()
 {
-
 	$this_plugin_url = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
 	
-	$dndmedia_style = get_option('dndmedia_style');
+	$dndmedia_dropstyle = get_option('dndmedia_dropstyle');
 ?>
 
-	<?php if (!empty($dndmedia_style)): ?>
+	<?php if (!empty($dndmedia_dropstyle)): ?>
 	<script type="text/javascript">
 	<!--
-	dndmedia_dropstyle = '<?= $dndmedia_style ?>';
+	dndmedia_dropstyle = '<?= $dndmedia_dropstyle ?>';
 	-->
 	</script>
 	<?php endif; ?>
