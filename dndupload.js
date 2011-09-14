@@ -1,5 +1,7 @@
 
 
+var dndmedia_dropstyle;
+
 jQuery(document).ready(function() {
 	
 	var res = magnCreateUploader();
@@ -14,7 +16,8 @@ jQuery(document).ready(function() {
 	jQuery('.dndmedia-insert-link').live('click', function() {
 		var title = "Image";// jQuery(this).attr('rel');
 		var url = jQuery(this).attr('rel');
-		tinyMCE.execCommand('mceInsertContent',false,'<br><img alt="'+title+'" src="'+url+'" />');
+		tinyMCE.execCommand('mceFocus', false);  //get('doc_content').
+		var res = tinyMCE.execCommand('mceInsertContent',false,'<br><img alt="'+title+'" src="'+url+'" />');
 		//alert('inserting ok');
 	} );
 	
@@ -28,7 +31,12 @@ function magnCreateUploader() {
 	// set progress bar
 	//jQuery("#upload-status-progressbar").progressbar({value: 0});
 	
-	var element = jQuery('#drop-box-jsupload')[0];
+	if ( dndmedia_dropstyle != undefined)
+	{
+		var element = jQuery('#drop-box-jsupload-gmail')[0];
+	}else{
+		var element = jQuery('#drop-box-jsupload')[0];
+	}
 	
 	if (element == undefined) return false;
 	
@@ -36,7 +44,7 @@ function magnCreateUploader() {
 		//element: document.getElementById('drop-box-jsupload'),
 		element: element,
 		action: ajaxurl,
-		debug: true,
+		debug: false,
 		
 		params: {'action': 'dndmedia', 'post_id': postid },
 		onSubmit: function(id, fileName){
@@ -132,10 +140,19 @@ function initDnD() {
 	body.addEventListener("dragenter", dndmediaOnDragEnter, false);
 	//document.getElementById("body").addEventListener("dragenter", onDragEnter, false);
 	
-	document.getElementById("drop-box-overlay").addEventListener("dragleave", dndmediaOnDragLeave, false);
-	document.getElementById("drop-box-overlay").addEventListener("dragover", dndmediaNoopHandler, false);
-	// Add drop handling
-	document.getElementById("drop-box-overlay").addEventListener("drop", dndmediaOnDrop, false);
+	if ( dndmedia_dropstyle != undefined)
+	{
+		document.getElementById("drop-box-overlay-gmail").addEventListener("dragleave", dndmediaOnDragLeave, false);
+		document.getElementById("drop-box-overlay-gmail").addEventListener("dragover", dndmediaNoopHandler, false);
+		document.getElementById("drop-box-overlay-gmail").addEventListener("dragenter", dndmediaOnDragEnterGmail, false);
+		document.getElementById("drop-box-overlay-gmail").addEventListener("drop", dndmediaOnDrop, false);
+		
+	} else {
+		document.getElementById("drop-box-overlay").addEventListener("dragleave", dndmediaOnDragLeave, false);
+		document.getElementById("drop-box-overlay").addEventListener("dragover", dndmediaNoopHandler, false);
+		// Add drop handling
+		document.getElementById("drop-box-overlay").addEventListener("drop", dndmediaOnDrop, false);
+	}
 	
 	// init the widgets
 	//jQuery("#upload-status-progressbar").progressbar();
@@ -147,8 +164,17 @@ function dndmediaNoopHandler(evt) {
 }
 
 function dndmediaOnDragEnter(evt) {
-	jQuery("#drop-box-overlay").fadeIn(125);
-	jQuery("#drop-box-prompt").fadeIn(125);
+
+	if ( dndmedia_dropstyle != undefined)
+	{
+		jQuery("#drop-box-overlay-gmail").show();
+		//jQuery("#drop-box-overlay-gmail-wrapper").fadeIn(125);
+		
+	} else {
+	
+		jQuery("#drop-box-overlay").fadeIn(125);
+		jQuery("#drop-box-prompt").fadeIn(125);
+	}
 }
 
 function dndmediaOnDragLeave(evt) {
@@ -167,9 +193,21 @@ function dndmediaOnDragLeave(evt) {
 	 * enough acceleration).
 	 */
 	if(evt.pageX < 10 || evt.pageY < 10 || jQuery(window).width() - evt.pageX < 10  || jQuery(window).height - evt.pageY < 10) {
-		jQuery("#drop-box-overlay").fadeOut(125);
-		jQuery("#drop-box-prompt").fadeOut(125);
+		
+		if ( dndmedia_dropstyle != undefined)
+		{
+			jQuery("#drop-box-overlay-gmail").fadeOut(0);
+			jQuery("#drop-box-overlay-gmail-wrapper").fadeOut(0);
+		}else{
+			jQuery("#drop-box-overlay").fadeOut(125);
+			jQuery("#drop-box-prompt").fadeOut(125);
+		}
 	}
+}
+
+function dndmediaOnDragEnterGmail(evt)
+{
+	jQuery("#drop-box-overlay-gmail").addClass('dndmedia_hover');
 }
 
 function dndmediaOnDrop(evt) {
@@ -177,8 +215,13 @@ function dndmediaOnDrop(evt) {
 	dndmediaNoopHandler(evt);
 	
 	// Hide overlay
-	jQuery("#drop-box-overlay").fadeOut(0);
-	jQuery("#drop-box-prompt").fadeOut(0);
+	if ( dndmedia_dropstyle != undefined)
+	{
+		jQuery("#drop-box-overlay-gmail").fadeOut(0);
+	}else{
+		jQuery("#drop-box-overlay").fadeOut(0);
+		jQuery("#drop-box-prompt").fadeOut(0);
+	}
 	
 	// Empty status text
 	jQuery("#upload-details").html("");

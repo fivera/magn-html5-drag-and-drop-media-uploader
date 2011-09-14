@@ -486,7 +486,7 @@ qq.FileUploader = function(o){
                 
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
-                '<div class="qq-upload-button">Upload a file</div>' +
+                '<div class="qq-upload-button"> </div>' +  // Drop files here
                 '<ul class="qq-upload-list"></ul>' + 
              '</div>',
 
@@ -630,6 +630,7 @@ qq.extend(qq.FileUploader.prototype, {
         this._find(item, 'size').style.display = 'none';        
 
         this._listElement.appendChild(item);
+
     },
     _getItemByFileId: function(id){
         var item = this._listElement.firstChild;        

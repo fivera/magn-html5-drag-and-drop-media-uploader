@@ -40,6 +40,9 @@ function dndmedia_show_ui_settings_page()
 					</select>
 				</div>
 				
+				<div><input type="checkbox" id="dndmedia_dropstyle" name="dndmedia_dropstyle" value="gmail" <?php echo (get_option('dndmedia_dropstyle') ? "checked" : "") ?>> Use Gmail drop files style</div>
+				
+				
 				<p class="submit">
 					<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 				</p>
@@ -77,11 +80,34 @@ function dndmedia_edit_form_advanced_ui()
 }
 
 
+
 function dndmedia_show_metabox_ui()
 {
 
 	$this_plugin_url = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+	
+	$dndmedia_style = get_option('dndmedia_style');
 ?>
+
+	<?php if (!empty($dndmedia_style)): ?>
+	<script type="text/javascript">
+	<!--
+	dndmedia_dropstyle = '<?= $dndmedia_style ?>';
+	-->
+	</script>
+	<?php endif; ?>
+
+	<div id="drop-box-overlay-gmail-wrapper"  style="display:none;">
+	</div>
+	
+	<div id="drop-box-overlay-gmail" style="display:none;"> 
+		<h1>
+			<div id="drop-box-jsupload-gmail" >
+			 Drop here
+			</div>
+		</h1> 
+	</div> 
+
 	<div id="dndmedia_meta_box">
 		<h2>Start dropping your images</h2>
 		
@@ -125,8 +151,8 @@ function dndmedia_show_metabox_ui()
 			
 		</div>
 		
-		<div>
-			<span>Special Gift: </span> <a href="javascript:void(0)" id="dndmedia_importurl">Import Image URL</a>
+		<div class="dndmedia_more">
+			<span class="dndmedia_bonus"></span> <a href="javascript:void(0)" id="dndmedia_importurl">Import Image URL</a>
 		</div>
 		
 	</div>

@@ -59,6 +59,7 @@ function widget_dndmedia_init() {
 		register_setting( 'dndmedia-settings-group', 'dndmedia_sendtoeditor' );
 		register_setting( 'dndmedia-settings-group', 'dndmedia_attachment' );
 		register_setting( 'dndmedia-settings-group', 'dndmedia_attachment_size' );
+		register_setting( 'dndmedia-settings-group', 'dndmedia_dropstyle' );
 	}
 	
 	function dndmedia_settings_page()

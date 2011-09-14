@@ -50,6 +50,35 @@
 	border: 4px dotted #333333;
 }
 
+#drop-box-overlay-gmail-wrapper
+{
+	margin: 1px;
+	padding: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	position: fixed;
+	background-color: #222222;
+	display: none;
+	z-index: 50;
+	opacity: 0.9;
+}
+
+#drop-box-overlay-gmail
+{
+	border: 1px solid #666666;
+	z-index: 100 !important;  /* really important */
+	
+	border: 4px dashed #679B00 !important;
+	background-color: #C9F76F !important;
+}
+
+#drop-box-jsupload-gmail
+{
+	padding: 60px 80px;
+}
+
 .dndmedia_thumb_div
 {
 	float:left;
@@ -78,6 +107,27 @@
 	text-align:center;
 }
 
+.dndmedia_more
+{
+	padding-top: 10px;
+}
+
+.dndmedia_bonus
+{
+	/*text-transform:uppercase;
+	font-weight: bold;
+	letter-spacing: -1px;
+	color: #0000ff;*/
+	text-indent: -9999px;
+	background: transparent url(images/bonus.png) no-repeat;
+	width: 87px;
+	height: 15px;
+}
+
+.dndmedia_hover
+{
+	border: 4px dashed #000000;
+}
 
 /* Progressbar
 ----------------------------------*/
