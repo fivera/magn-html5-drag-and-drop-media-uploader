@@ -3,7 +3,7 @@
 Plugin Name: Magn Drag and Drop Upload
 Plugin URI: 
 Description: This plugin will help you to drag and drop images directly in your New Post page. Saves 90% of time while uploading images.
-Version: 0.9
+Version: 1.1
 Author: Julian Magnone
 Author URI: http://netvivs.com/
 
