@@ -74,8 +74,9 @@
 	background-color: #C9F76F !important;
 }
 
-#drop-box-jsupload-gmail
+#drop-box-jsupload-gmail span
 {
+	display:block;
 	padding: 60px 80px;
 }
 
@@ -120,14 +121,30 @@
 	letter-spacing: -1px;
 	color: #0000ff;*/
 	text-indent: -9999px;
-	background: transparent url(images/bonus.png) no-repeat;
+	background: transparent url(images/bonus.png) no-repeat center -2px;
 	width: 87px;
 	height: 15px;
+	
+	line-height: 20px;
+	width: 120px; float:left;height: 20px;
 }
 
 .dndmedia_hover
 {
 	border: 4px dashed #000000;
+}
+
+#wpwrap.dndmedia_hover
+{
+	background-color: #333333 !important;
+}
+
+#dndmedia_meta_box h2
+{
+	/*padding-left: 50px;
+	background: url(images/dndmediaiconbig.png) no-repeat;
+	line-height: 50px;
+	*/
 }
 
 /* Progressbar

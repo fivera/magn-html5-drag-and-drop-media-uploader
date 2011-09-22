@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
 Tested up to: 3.1.2
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 
 Magn WP Drag and Drop Upload
 
@@ -77,6 +77,10 @@ It is recommended to setup your Medium size dimensions and then configure the pl
 == Changelog ==
 
 This is the update history:
+
+Changes 1.1.2
+
+1. Adding small fixes
 
 Changes 1.1
 

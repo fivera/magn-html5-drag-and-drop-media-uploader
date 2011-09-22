@@ -163,11 +163,23 @@ function dndmediaNoopHandler(evt) {
 	evt.preventDefault();
 }
 
+var dndmedia_scrollto = false;
 function dndmediaOnDragEnter(evt) {
 
 	if ( dndmedia_dropstyle != undefined)
 	{
+	
+		//jQuery("#wpwrap").addClass('dndmedia_hover');
 		jQuery("#drop-box-overlay-gmail").show();
+		if (!dndmedia_scrollto)
+		{
+			jQuery('html, body').animate({
+				scrollTop: jQuery("#drop-box-overlay-gmail").offset().top
+			}, 500);
+			dndmedia_scrollto = true;
+		}
+		
+		
 		//jQuery("#drop-box-overlay-gmail-wrapper").fadeIn(125);
 		
 	} else {
@@ -196,8 +208,11 @@ function dndmediaOnDragLeave(evt) {
 		
 		if ( dndmedia_dropstyle != undefined)
 		{
+			//jQuery("#wpwrap").css('background-color', 'black');
+			jQuery("#wpwrap").removeClass('dndmedia_hover');
 			jQuery("#drop-box-overlay-gmail").fadeOut(0);
 			jQuery("#drop-box-overlay-gmail-wrapper").fadeOut(0);
+			
 		}else{
 			jQuery("#drop-box-overlay").fadeOut(125);
 			jQuery("#drop-box-prompt").fadeOut(125);

@@ -88,13 +88,19 @@ function dndmedia_show_metabox_ui()
 	$dndmedia_dropstyle = get_option('dndmedia_dropstyle');
 ?>
 
-	<?php if (!empty($dndmedia_dropstyle)): ?>
+	
 	<script type="text/javascript">
 	<!--
+	<?php if (!empty($dndmedia_dropstyle)): ?>
 	dndmedia_dropstyle = '<?= $dndmedia_dropstyle ?>';
+	<?php endif; ?>
+	
+	<?php if (!empty($dndmedia_scrollto)): ?>
+	dndmedia_scrollto = '<?= $dndmedia_scrollto ?>';
+	<?php endif; ?>
 	-->
 	</script>
-	<?php endif; ?>
+	
 
 	<div id="drop-box-overlay-gmail-wrapper"  style="display:none;">
 	</div>
@@ -151,7 +157,8 @@ function dndmedia_show_metabox_ui()
 		</div>
 		
 		<div class="dndmedia_more">
-			<span class="dndmedia_bonus"></span> <a href="javascript:void(0)" id="dndmedia_importurl">Import Image URL</a>
+			<div style="float:right;"><a href="http://www.netvivs.com/drag-and-drop-upload-for-wordpress/" target="_blank">Help</a></div>
+			<span class="dndmedia_bonus" style="">&nbsp;&nbsp;&nbsp;</span> <a href="javascript:void(0)" id="dndmedia_importurl">Import Image URL</a>
 		</div>
 		
 	</div>
