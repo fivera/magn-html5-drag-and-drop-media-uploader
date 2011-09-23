@@ -13,7 +13,7 @@ Magn WP Drag and Drop Upload
 Magn WP Drag and Drop Upload helps to save your time while uploading images to WordPress posts. By using Drag And Drop Upload plugin you can automagically
 upload your images to WordPress posts thanks to HTML5 and an drag and drop upload script. At the end, you'll see that saves lot of time while uploading your
 images to WP posts. This is an innovative way to upload your images to WordPress and save time. I created this plugin based on the great Ajax Upload plugin
-developed by Valums http://valums.com/ajax-upload/
+developed by Valums.
 
 This plugin can only work on modern web browsers and takes advantage of HTML5 Drag and Drop support.
 
@@ -52,6 +52,9 @@ Known bugs:
 1. It is not inserting images when source code editor is active.
 2. Only works for posts.
 
+Video:
+
+Learn how to use it: http://www.youtube.com/watch?v=MDIkTGpkfwQ
 
 == Installation ==
 
@@ -65,6 +68,8 @@ How to use it
 
 You can configure the default thumbnail image. This option is very useful if you want to avoid posting the full or large image in WordPress post. 
 It is recommended to setup your Medium size dimensions and then configure the plugin to "send to editor" a medium size image instead of the full image.
+
+Also you can take a look at this video to learn how to use it. http://www.youtube.com/watch?v=MDIkTGpkfwQ
 
 
 == Frequently Asked Questions ==
