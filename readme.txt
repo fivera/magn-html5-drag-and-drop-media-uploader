@@ -3,8 +3,8 @@ Contributors: jmagnone
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HH6C3PGQEE2GW
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
-Tested up to: 3.1.2
-Stable tag: 1.1.2
+Tested up to: 3.2.2
+Stable tag: 1.1.3
 
 Magn WP Drag and Drop Upload
 
