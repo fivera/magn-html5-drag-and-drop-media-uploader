@@ -86,6 +86,7 @@ function dndmedia_show_metabox_ui()
 	$this_plugin_url = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
 	
 	$dndmedia_dropstyle = get_option('dndmedia_dropstyle');
+	$dndmedia_dropstyle = 'gmail';
 ?>
 
 	
@@ -105,7 +106,7 @@ function dndmedia_show_metabox_ui()
 	<div id="drop-box-overlay-gmail-wrapper"  style="display:none;">
 	</div>
 	
-	<div id="drop-box-overlay-gmail" style="display:none;"> 
+	<div id="drop-box-overlay-gmail" style=""> 
 		<h1>
 			<div id="drop-box-jsupload-gmail" >
 			 Drop here
@@ -114,7 +115,7 @@ function dndmedia_show_metabox_ui()
 	</div> 
 
 	<div id="dndmedia_meta_box">
-		<h2>Start dropping your images</h2>
+		<!-- <h2>Start dropping your images</h2> -->
 		
 		<div>
 			<div id="upload-status-progressbar" style="display:none; float:left; width: 160px; height: 40px;"><img src="<?php echo $this_plugin_url.'/images/loader.gif' ?>" /></div> 

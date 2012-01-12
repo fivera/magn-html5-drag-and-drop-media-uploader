@@ -16,9 +16,31 @@ jQuery(document).ready(function() {
 	jQuery('.dndmedia-insert-link').live('click', function() {
 		var title = "Image";// jQuery(this).attr('rel');
 		var url = jQuery(this).attr('rel');
-		tinyMCE.execCommand('mceFocus', false);  //get('doc_content').
+		//tinyMCE.execCommand('mceFocus', false);  //get('doc_content').
+		
+		jQuery("#edButtonPreview").click();
+		//switchEditors.go('content', 'tinymce');
+		
 		var res = tinyMCE.execCommand('mceInsertContent',false,'<br><img alt="'+title+'" src="'+url+'" />');
 		//alert('inserting ok');
+	} );
+	
+	jQuery('.dndmedia-rename-link').live('click', function() { 
+		
+		alert('Under development. This feature will allow you to rename the filename of this image.');
+		
+		var fullpath = jQuery(this).parent().find('img').attr('src');
+		filename = fullpath.replace(/^.*[\\\/]/, '');
+		fileext = /[^.]+$/.exec(filename);
+		var filename_noext = filename.substr(0, filename.lastIndexOf('.')) || filename;
+		
+		var new_filename = prompt("Enter new file name", filename_noext);
+		if (new_filename != undefined)
+		{
+			
+			return true;
+		}
+		
 	} );
 	
 	initDnDExtraTools();	
@@ -74,9 +96,20 @@ function magnCreateUploader() {
 			jQuery("#upload-status-progressbar").fadeOut(0);
 		},
 		
-	});  
+	}); 
+	
+	jQuery('.dndmedia_thumb_div').live('dblclick', function() {
+		var url = jQuery(this).find('img').attr('url');
+		magnInsertImage(url, "");
+	} );
+	
 
 	return true;	
+}
+
+function magnInsertImage(url, title)
+{
+	tinyMCE.execCommand('mceInsertContent',false,'<img alt="'+title+'" src="'+url+'" />');
 }
 
 function dndmediaProcessCompletedFileUpload(id, fileName, response)
@@ -88,7 +121,11 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 	if (response.url)
 	{
 		var markup = new String();
-		markup = "<div class='dndmedia_file_row'><div class=\"dndmedia_thumb_div\"><img src=\""+response.url+"\" alt=\"\" width=\"120\" class=dndmedia_thumb_img /><label>"+response.name+"</label><a href=\"#\" class=\"dndmedia-insert-link\" rel=\""+response.url+"\" style=\"display:none;\" >insert</a></div></div>";
+		
+		response.name = response.url.replace(/^.*[\\\/]/, '');
+		
+		markup = "<div class='dndmedia_file_row'><div class=\"dndmedia_thumb_div\"><img src=\""+response.url+"\" alt=\"\" width=\"120\" class=dndmedia_thumb_img /><label>"+response.name+"</label><a href=\"javascript:void(0)\" class=\"dndmedia-link dndmedia-insert-link\" rel=\""+response.url+"\" style=\"display:visible;\" >insert</a>" +
+		"<br/><a href=\"javascript:void(0)\" class=\"dndmedia-link dndmedia-rename-link\" style=\"display:none\">rename</a>  </div></div>";
 		jQuery('#dndmedia_files').append( markup );
 		
 		var dndmedia_sendtoeditor = jQuery('#dndmedia_sendtoeditor').attr('checked');
@@ -102,7 +139,7 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 			if (dndmedia_attachment_size != undefined)
 			{
 				// try to get attachment size
-				if ( response.attachment_data.sizes[dndmedia_attachment_size] != undefined )
+				if ( response.attachment_data.sizes && response.attachment_data.sizes[dndmedia_attachment_size] != undefined )
 				{
 					// get path without original file name (this is because WordPress only specify the filename without path for additional attachment sizes
 					var dndmedia_filename_index = url.lastIndexOf("/");
@@ -117,7 +154,14 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 			}
 		
 			// send the image to editor
-			tinyMCE.execCommand('mceInsertContent',false,'<img alt="'+response.attachment_data.image_meta.title+'" src="'+url+'" />');
+			try {
+				var title = response.attachment_data.image_meta.title;
+				if (!response.attachment_data.image_meta.title) response.attachment_data.image_meta.title = '';
+				
+				//TODO: Check if this is image - or media type
+			} catch (err) { }
+			
+			magnInsertImage(url, title);
 		}
 		
 	}else{
@@ -143,7 +187,9 @@ function initDnD() {
 	if ( dndmedia_dropstyle != undefined)
 	{
 		document.getElementById("drop-box-overlay-gmail").addEventListener("dragleave", dndmediaOnDragLeave, false);
-		document.getElementById("drop-box-overlay-gmail").addEventListener("dragover", dndmediaNoopHandler, false);
+		//document.getElementById("drop-box-overlay-gmail").addEventListener("dragover", dndmediaNoopHandler, false);
+		document.getElementById("drop-box-overlay-gmail").addEventListener("dragover", dndmediaOnDragOver, false);
+		
 		document.getElementById("drop-box-overlay-gmail").addEventListener("dragenter", dndmediaOnDragEnterGmail, false);
 		document.getElementById("drop-box-overlay-gmail").addEventListener("drop", dndmediaOnDrop, false);
 		
@@ -168,7 +214,6 @@ function dndmediaOnDragEnter(evt) {
 
 	if ( dndmedia_dropstyle != undefined)
 	{
-	
 		//jQuery("#wpwrap").addClass('dndmedia_hover');
 		jQuery("#drop-box-overlay-gmail").show();
 		if (!dndmedia_scrollto)
@@ -178,7 +223,6 @@ function dndmediaOnDragEnter(evt) {
 			}, 500);
 			dndmedia_scrollto = true;
 		}
-		
 		
 		//jQuery("#drop-box-overlay-gmail-wrapper").fadeIn(125);
 		
@@ -210,14 +254,19 @@ function dndmediaOnDragLeave(evt) {
 		{
 			//jQuery("#wpwrap").css('background-color', 'black');
 			jQuery("#wpwrap").removeClass('dndmedia_hover');
-			jQuery("#drop-box-overlay-gmail").fadeOut(0);
-			jQuery("#drop-box-overlay-gmail-wrapper").fadeOut(0);
+//			jQuery("#drop-box-overlay-gmail").fadeOut(0);
+//			jQuery("#drop-box-overlay-gmail-wrapper").fadeOut(0);
 			
 		}else{
 			jQuery("#drop-box-overlay").fadeOut(125);
 			jQuery("#drop-box-prompt").fadeOut(125);
 		}
 	}
+}
+
+function dndmediaOnDragOver(evt)
+{
+	jQuery("#drop-box-overlay-gmail").addClass('dndmedia_hover');
 }
 
 function dndmediaOnDragEnterGmail(evt)
@@ -232,7 +281,7 @@ function dndmediaOnDrop(evt) {
 	// Hide overlay
 	if ( dndmedia_dropstyle != undefined)
 	{
-		jQuery("#drop-box-overlay-gmail").fadeOut(0);
+//		jQuery("#drop-box-overlay-gmail").fadeOut(0);
 	}else{
 		jQuery("#drop-box-overlay").fadeOut(0);
 		jQuery("#drop-box-prompt").fadeOut(0);
@@ -278,14 +327,6 @@ function dndmediaOnDrop(evt) {
 		uploadFile(files[i], length);
 	}*/
 }
-
-// new jsupload file 
-/*
-function uploadFile(file, totalFiles)
-{
-	
-	
-}*/
 
 /**
  * Used to update the progress bar and check if all uploads are complete. Checking

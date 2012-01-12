@@ -31,7 +31,8 @@
 	border-top-right-radius: 4px 4px;
 	
 	color: #222222 !important;
-	font-size: 150% !important;
+	font-size: 130% !important;
+	font-weight: normal;
 	text-shadow: 1px 1px 1px #FFFFFF !important;
 }
 
@@ -67,17 +68,23 @@
 
 #drop-box-overlay-gmail
 {
-	border: 1px solid #666666;
 	z-index: 100 !important;  /* really important */
-	
+	/*
 	border: 4px dashed #679B00 !important;
 	background-color: #C9F76F !important;
+	
+		background-color:inherit;
+		border: inherit;
+		*/
 }
 
 #drop-box-jsupload-gmail span
 {
 	display:block;
-	padding: 60px 80px;
+	padding: 30px 80px;
+	font-size: 22px;
+	font-weight: normal;
+	text-align:center;
 }
 
 .dndmedia_thumb_div
@@ -129,10 +136,22 @@
 	width: 120px; float:left;height: 20px;
 }
 
-.dndmedia_hover
+#drop-box-overlay-gmail.dndmedia_hover
 {
 	border: 4px dashed #000000;
 }
+
+.qq-upload-drop-area
+{
+	border: 4px dashed #679B00;
+	background-color: #C9F76F;
+}
+
+.qq-upload-drop-area-active
+{
+	border: 4px dashed #000000 !important;
+}
+
 
 #wpwrap.dndmedia_hover
 {
@@ -151,4 +170,21 @@
 ----------------------------------*/
 .ui-progressbar { height:2em; text-align: left; }
 .ui-progressbar .ui-progressbar-value {margin: -1px; height:100%; }
+
+
+.dndmedia_file_row label
+{
+	padding: 4px 0px;
+}
+.dndmedia-link
+{
+
+	display:inline;
+	border:1px solid #444;
+	line-height: 20px;
+
+	text-indent:-9999px;
+	padding: 2px 4px;
+}
+
 
