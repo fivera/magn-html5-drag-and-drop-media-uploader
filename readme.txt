@@ -71,8 +71,16 @@ It is recommended to setup your Medium size dimensions and then configure the pl
 
 Also you can take a look at this video to learn how to use it. http://www.youtube.com/watch?v=MDIkTGpkfwQ
 
+Follow @jmagnone on Twitter
+
 
 == Frequently Asked Questions ==
+
+= What are the browsers supported =
+
+This plugin was tested in Chrome 16 and Firefox 3.x
+
+
 
 == Screenshots ==
 
@@ -82,6 +90,12 @@ Also you can take a look at this video to learn how to use it. http://www.youtub
 == Changelog ==
 
 This is the update history:
+
+Changes 1.1.4
+
+1. UI improvement
+2. Fix import URL feature 
+3. Preparing to add copy and paste from image source
 
 Changes 1.1.2
 
@@ -100,3 +114,10 @@ Changes 0.9
 1. URL drag and drop is now supported.
 2. Small fixes and bug troubleshooting.
  
+ 
+== Upgrade Notice ==
+
+= 1.1.4 =
+Some UI improvements to the Drag and Drop section were applied, code was re-organized better.
+
+  
