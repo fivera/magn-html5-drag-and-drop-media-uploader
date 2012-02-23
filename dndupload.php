@@ -3,7 +3,7 @@
 Plugin Name: Magn Drag and Drop Upload
 Plugin URI: http://magn.com/drag-and-drop-image-upload-for-wordpress/
 Description: This plugin will help you to drag and drop images directly in your New Post page. Saves 90% of time while uploading images.
-Version: 1.1.4
+Version: 1.2.0
 Author: Julian Magnone
 Author URI: http://magn.com/
 
@@ -43,9 +43,24 @@ function widget_dndmedia_init() {
 		add_action( 'admin_init', 'dndmedia_add_meta_boxes' );
 	}
 	
+	
 	function dndmedia_add_meta_boxes()
 	{
-		add_meta_box( 'dndmedia_metabox', 'Magn Drag and Drop Upload', 'dndmedia_show_metabox_ui', 'post', 'normal', 'high' );
+	
+		if (TRUE) {
+			$post_types = get_post_types( array( 'public' => true ), 'names' );
+			foreach ( $post_types as $post_type ) {
+				//if ( $post_type == 'page' || $post_type =='post' )	continue; 
+				add_meta_box( 'dndmedia_metabox', 'Magn Drag and Drop Upload', 'dndmedia_show_metabox_ui', $post_type, 'normal', 'high' );
+			}	
+			//var_dump($post_types);
+			//add_meta_box( 'dndmedia_metabox', 'Magn Drag and Drop Upload', 'dndmedia_show_metabox_ui', $post_types, 'normal', 'high' );
+			
+		} else {
+		
+			add_meta_box( 'dndmedia_metabox', 'Magn Drag and Drop Upload', 'dndmedia_show_metabox_ui', 'post', 'normal', 'high' );
+		}
+		
 	}
 
 	function register_dndmedia_settings() {
@@ -187,7 +202,6 @@ function ajax_dndmedia_callback() {
 	$log = array();
 	
 	$post_id = $_REQUEST['post_id'];
-	//var_dump($_REQUEST); <-- works
 
 	// STEP 1 : Handle the upload with jsUpload script
 	$log[] = "Step 1: Uploading file";
@@ -238,6 +252,7 @@ function ajax_dndmedia_callback() {
 	// In case of error throuw it
 	if ( isset($fileinfo['error']) )
 	{
+		@unlink($tempname);
 		return new WP_Error( 'upload_error', $fileinfo['error'] );
 	}
 	

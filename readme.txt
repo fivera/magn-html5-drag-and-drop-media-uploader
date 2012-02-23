@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: upload, media, files, drag & drop 
 Requires at least: 3.1.2
 Tested up to: 3.3.1
-Stable tag: 1.1.4
+Stable tag: 1.2.0
 
 Magn WP Drag and Drop Upload
 
@@ -90,6 +90,11 @@ This plugin was tested in Chrome 16 and Firefox 3.x
 == Changelog ==
 
 This is the update history:
+
+Changes 1.2.0
+
+1. Vulnerability fix where guest register was enabled in WordPress
+2. Changing readme.txt
 
 Changes 1.1.4
 

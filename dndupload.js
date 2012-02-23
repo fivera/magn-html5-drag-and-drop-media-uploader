@@ -218,9 +218,10 @@ function dndmediaOnDragEnter(evt) {
 		jQuery("#drop-box-overlay-gmail").show();
 		if (!dndmedia_scrollto)
 		{
-			jQuery('html, body').animate({
+			/*jQuery('html, body').animate({
 				scrollTop: jQuery("#drop-box-overlay-gmail").offset().top
 			}, 500);
+			*/
 			dndmedia_scrollto = true;
 		}
 		
