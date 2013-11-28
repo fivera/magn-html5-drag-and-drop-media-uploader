@@ -3,10 +3,11 @@
 Plugin Name: Magn Drag and Drop Upload
 Plugin URI: http://magn.com/drag-and-drop-image-upload-for-wordpress/
 Description: This plugin will help you to drag and drop images directly in your New Post page. Saves 90% of time while uploading images.
-Version: 1.2.0
+Version: 1.2.1
 Author: Julian Magnone
 Author URI: http://magn.com/
-
+Contributors: jmagnone
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VVE9SYHSM38FY
 
 Other Resources:
 http://www.thebuzzmedia.com/html5-drag-and-drop-and-file-api-tutorial/

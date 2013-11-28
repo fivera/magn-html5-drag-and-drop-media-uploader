@@ -1,7 +1,7 @@
 === Magn WP Drag and Drop Upload ===
 Contributors: jmagnone
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HH6C3PGQEE2GW
-Tags: upload, media, files, drag & drop 
+Tags: upload, media, files, drag & drop, attachments, download, editor
 Requires at least: 3.1.2
 Tested up to: 3.6
 Stable tag: trunk
@@ -10,14 +10,18 @@ Magn WP Drag and Drop Upload
 
 == Description ==
 
-Magn WP Drag and Drop Upload helps to save your time while uploading images to WordPress posts. By using Drag And Drop Upload plugin you can automagically
-upload your images to WordPress posts thanks to HTML5 and an drag and drop upload script. At the end, you'll see that saves lot of time while uploading your
-images to WP posts. This is an innovative way to upload your images to WordPress and save time. I created this plugin based on the great Ajax Upload plugin
-developed by Valums.
+**Magn WP Drag and Drop Upload** helps to save your time while uploading images to WordPress posts. 
+
+Update 2013: Notice that at the time this plugin was developed WordPress didn't include the built-in Drag & Drop feature. Nowadays WordPress has a built-in 
+feature, although you can continue usign this plugin if you want to avoid the step of clicking Add Media button every time you need to upload an image to your post.
+
+By using Drag And Drop Upload plugin you can automagically upload your images to WordPress posts thanks to HTML5 and an drag and drop upload script. 
+At the end, you'll see that saves lot of time while uploading your images to WP posts. This is an innovative way to upload your images to WordPress and save time.
+I created this plugin based on the great Ajax Upload plugin developed by Valums.
 
 This plugin can only work on modern web browsers and takes advantage of HTML5 Drag and Drop support.
 
-How was the old process?
+The old process:
 
 1. Create a new post
 2. Click on the Upload Image icon
@@ -27,30 +31,23 @@ How was the old process?
 6. Click on Accept
 7. Click on Insert into Post option
 
-How it works with Magn WP Drag and Drop Upload?
+How it works with **Magn WP Drag and Drop Upload**?
 
 1. Create a new post
 2. Drag and drop your image (not inside the editor, please)
 
-Easy, right?
-
-Here is a list of features:
+Easy, right? Here is a list of simple features:
 
 1. Automagically insert the image in a desired format into the post editor.
 2. Creates an attachment for the post you are intersting the image on.
 3. Support multiple files at once (just drag and drop multiple images to the WordPress admin panel and voila!)
 
-Wish list:
+Wish list (you are welcome to submit your ideas):
 
 1. Change file name on the fly.
 2. Add SEO features, improve image attributes and support filename management.
 3. Integratation with CDN plugins (currently not supported).
 4. Finish the progress bar display.
-
-Known bugs:
-
-1. It is not inserting images when source code editor is active.
-2. Only works for posts.
 
 Video:
 
@@ -71,8 +68,7 @@ It is recommended to setup your Medium size dimensions and then configure the pl
 
 Also you can take a look at this video to learn how to use it. http://www.youtube.com/watch?v=MDIkTGpkfwQ
 
-Follow @jmagnone on Twitter
-
+Follow me [@jmagnone](http://twitter.com/jmagnone) on Twitter or visit my website [Magn.com](http://magn.com/drag-and-drop-image-upload-for-wordpress/)
 
 == Frequently Asked Questions ==
 
@@ -80,7 +76,9 @@ Follow @jmagnone on Twitter
 
 This plugin was tested in Chrome 16 and Firefox 3.x
 
+= What if the plugin is not working? =
 
+Contact me at any time info at magn dot com and I will help you.
 
 == Screenshots ==
 
@@ -90,6 +88,11 @@ This plugin was tested in Chrome 16 and Firefox 3.x
 == Changelog ==
 
 This is the update history:
+
+Changes 1.2.1
+
+1. Adding support to insert into Text editor (textarea). Now wysiwyg and text view are supported.
+2. Try to insert the current post title for the alt and title attributes. A little help to tag your images.
 
 Changes 1.2.0
 

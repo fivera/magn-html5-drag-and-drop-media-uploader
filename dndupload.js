@@ -1,28 +1,19 @@
 
-
 var dndmedia_dropstyle;
 
 jQuery(document).ready(function() {
 	
 	var res = magnCreateUploader();
-	if (!res)
-	{
-		return false;
-	}
+	if (!res) return false;
 	
 	initBrowserWarning();
 	initDnD();
 	
 	jQuery('.dndmedia-insert-link').live('click', function() {
-		var title = "Image";// jQuery(this).attr('rel');
+		var title = jQuery("#post-body input[name=post_title]").val();
 		var url = jQuery(this).attr('rel');
-		//tinyMCE.execCommand('mceFocus', false);  //get('doc_content').
-		
 		jQuery("#edButtonPreview").click();
-		//switchEditors.go('content', 'tinymce');
-		
-		var res = tinyMCE.execCommand('mceInsertContent',false,'<br><img alt="'+title+'" src="'+url+'" />');
-		//alert('inserting ok');
+		magnInsertImage( url, title );
 	} );
 	
 	jQuery('.dndmedia-rename-link').live('click', function() { 
@@ -46,12 +37,10 @@ jQuery(document).ready(function() {
 	initDnDExtraTools();	
 });
 
+
 function magnCreateUploader() {
 
 	var postid = jQuery('input#post_ID').val();
-	
-	// set progress bar
-	//jQuery("#upload-status-progressbar").progressbar({value: 0});
 	
 	if ( dndmedia_dropstyle != undefined)
 	{
@@ -109,11 +98,27 @@ function magnCreateUploader() {
 
 function magnInsertImage(url, title)
 {
-	tinyMCE.execCommand('mceInsertContent',false,'<img alt="'+title+'" src="'+url+'" />');
+	var textToInsert = '<img alt="'+title+'" title="'+title+'" src="'+url+'" />';
+
+	if (jQuery("textarea#content").is(":visible"))
+	{
+		textToInsert = "\n" + textToInsert + "\n";
+		var $content = jQuery('textarea#content');
+		var cursorPos = $content.prop('selectionStart');
+		var v = $content.val();
+		var textBefore = v.substring(0,  cursorPos );
+		var textAfter  = v.substring( cursorPos, v.length );
+		$content.val( textBefore + textToInsert +textAfter );
+
+	} else {
+		tinyMCE.execCommand('mceInsertContent',false, textToInsert);
+	}
+			
 }
 
 function dndmediaProcessCompletedFileUpload(id, fileName, response)
 {
+	var title = "";
 	// Update stats
 	jQuery('#dndmedia_status').text("");
 	
@@ -135,7 +140,7 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 		if (dndmedia_sendtoeditor)
 		{
 			var url = response.url;
-			//alert('dndmedia_attachment_size' + dndmedia_attachment_size);
+			//console.log('dndmedia_attachment_size' + dndmedia_attachment_size);
 			if (dndmedia_attachment_size != undefined)
 			{
 				// try to get attachment size
@@ -147,20 +152,21 @@ function dndmediaProcessCompletedFileUpload(id, fileName, response)
 					
 					// replace the url with new determined path plus the attachment filename
 					url = dndmedia_filename_path + '/' + response.attachment_data.sizes[dndmedia_attachment_size].file;
-					//alert('file ' + url);
+					//console.log('file ' + url);
 				} else {
-					//alert('no url file ' + url);
+					//console.log('no url file ' + url);
 				}
 			}
 		
 			// send the image to editor
 			try {
-				var title = response.attachment_data.image_meta.title;
+				title = response.attachment_data.image_meta.title;
 				if (!response.attachment_data.image_meta.title) response.attachment_data.image_meta.title = '';
 				
 				//TODO: Check if this is image - or media type
 			} catch (err) { }
-			
+
+			if (title == undefined) title = jQuery("#post-body input[name=post_title]").val();
 			magnInsertImage(url, title);
 		}
 		
@@ -187,9 +193,7 @@ function initDnD() {
 	if ( dndmedia_dropstyle != undefined)
 	{
 		document.getElementById("drop-box-overlay-gmail").addEventListener("dragleave", dndmediaOnDragLeave, false);
-		//document.getElementById("drop-box-overlay-gmail").addEventListener("dragover", dndmediaNoopHandler, false);
 		document.getElementById("drop-box-overlay-gmail").addEventListener("dragover", dndmediaOnDragOver, false);
-		
 		document.getElementById("drop-box-overlay-gmail").addEventListener("dragenter", dndmediaOnDragEnterGmail, false);
 		document.getElementById("drop-box-overlay-gmail").addEventListener("drop", dndmediaOnDrop, false);
 		
@@ -253,10 +257,7 @@ function dndmediaOnDragLeave(evt) {
 		
 		if ( dndmedia_dropstyle != undefined)
 		{
-			//jQuery("#wpwrap").css('background-color', 'black');
 			jQuery("#wpwrap").removeClass('dndmedia_hover');
-//			jQuery("#drop-box-overlay-gmail").fadeOut(0);
-//			jQuery("#drop-box-overlay-gmail-wrapper").fadeOut(0);
 			
 		}else{
 			jQuery("#drop-box-overlay").fadeOut(125);
@@ -290,13 +291,6 @@ function dndmediaOnDrop(evt) {
 	
 	// Empty status text
 	jQuery("#upload-details").html("");
-	
-	// Reset progress bar incase we are dropping MORE files on an existing result page
-	//progressbar
-	//jQuery("#upload-status-progressbar").progressbar({value:0});
-	
-	// Show progressbar
-	//jQuery("#upload-status-progressbar").fadeIn(0);
 	
 	// Get the dropped files.
 	var files = evt.dataTransfer.files;
